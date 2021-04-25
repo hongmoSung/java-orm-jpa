@@ -15,10 +15,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("hello");
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setId(1L);
+            member1.setName("hello");
+
+            Member member2 = new Member();
+            member2.setId(1L);
+            member2.setName("hello");
+
+            em.persist(member1);
+            em.persist(member2);
             tx.commit();
 
             final Member findMember = em.find(Member.class, 1L);

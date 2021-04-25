@@ -1,6 +1,8 @@
 # 자바 ORM 표준 JPA 프로그래밍 - 기본편
 
-### SIL study
+### SIL study7
+
+
 
 1. [x] 강좌 소개
 2. [x] JPA 소개
