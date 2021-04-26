@@ -18,8 +18,9 @@ public class JpaMain {
             Member member1 = new Member();
             member1.setId(1L);
             member1.setName("hello");
-
             em.persist(member1);
+            // 준영속성
+//            em.detach(member1);
             tx.commit();
 
             final Member findMember = em.find(Member.class, 1L);
