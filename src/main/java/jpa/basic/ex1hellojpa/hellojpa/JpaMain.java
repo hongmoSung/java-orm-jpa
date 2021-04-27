@@ -23,19 +23,12 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+            member.changeTeam( team);
             em.persist(member);
 
             // 영속성 제거
             em.flush();
             em.clear();
-
-            final Member findMember = em.find(Member.class, member.getId());
-            final List<Member> members = findMember.getTeam().getMembers();
-
-            for (Member m : members) {
-                System.out.println("m -> " + m.getUsername());
-            }
 
             tx.commit();
         } catch (Exception e) {
