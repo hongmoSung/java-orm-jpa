@@ -16,20 +16,8 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
-            Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam( team);
-            em.persist(member);
-
-            // 영속성 제거
-            em.flush();
-            em.clear();
-
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
             tx.commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
