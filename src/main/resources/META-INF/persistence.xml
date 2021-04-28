@@ -8,6 +8,7 @@
         <class>jpa.basic.ex1hellojpa.hellojpa.OrderItem</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Item</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Team</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Locker</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
