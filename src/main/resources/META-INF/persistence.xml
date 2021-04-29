@@ -10,6 +10,9 @@
         <class>jpa.basic.ex1hellojpa.hellojpa.Team</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Locker</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Product</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Album</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Movie</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Book</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
