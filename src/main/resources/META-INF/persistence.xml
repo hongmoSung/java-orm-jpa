@@ -13,6 +13,8 @@
         <class>jpa.basic.ex1hellojpa.hellojpa.Movie</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Book</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.MemberProduct</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Parent</class>
+        <class>jpa.basic.ex1hellojpa.hellojpa.Child</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
