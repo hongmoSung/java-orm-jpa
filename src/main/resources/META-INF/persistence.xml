@@ -8,7 +8,6 @@
         <class>jpa.basic.ex1hellojpa.hellojpa.OrderItem</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Item</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Team</class>
-        <class>jpa.basic.ex1hellojpa.hellojpa.Locker</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Product</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Album</class>
         <class>jpa.basic.ex1hellojpa.hellojpa.Movie</class>
