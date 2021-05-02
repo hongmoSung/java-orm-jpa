@@ -19,13 +19,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            final CriteriaBuilder cb = em.getCriteriaBuilder();
-            final CriteriaQuery<Member> query = cb.createQuery(Member.class);
-
-            final Root<Member> m = query.from(Member.class);
-
-            final CriteriaQuery<Member> criteriaQuery = query.select(m).where(cb.equal(m.get("username"), "kim"));
-            final List<Member> members = em.createQuery(criteriaQuery).getResultList();
+            em.createNativeQuery("select  member_id from Member").getResultList();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
