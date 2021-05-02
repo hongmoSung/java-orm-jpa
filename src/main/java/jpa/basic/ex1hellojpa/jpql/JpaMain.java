@@ -1,6 +1,4 @@
-package jpa.basic.ex1hellojpa.hellojpa;
-
-import jpa.basic.ex1hellojpa.jpql.Member;
+package jpa.basic.ex1hellojpa.jpql;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
