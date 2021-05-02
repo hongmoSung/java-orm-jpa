@@ -21,13 +21,15 @@ public class JpaMain {
             member.setUsername("member1");
             member.setAge(10);
             member.setTeam(team);
+            member.setType(MemberType.ADMIN);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left outer join m.team t";
-            final List<Member> result = em.createQuery(query, Member.class) .getResultList();
+            String query = "select locate('de', 'asdf') from Member m";
+            em.createQuery(query, Integer.class).getResultList();
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
