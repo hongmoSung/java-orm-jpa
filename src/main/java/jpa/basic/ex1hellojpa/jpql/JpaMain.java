@@ -13,18 +13,26 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("홍성모");
-            member.setAge(10);
-            em.persist(member);
+
+            for (int i = 0; i < 100; i++) {
+                Member member = new Member();
+                member.setUsername("홍성모" + i);
+                member.setAge(i);
+                em.persist(member);
+            }
 
             em.flush();
             em.clear();
 
-            final List<MemberDTO> result = em.createQuery("select new jpa.basic.ex1hellojpa.jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
-            final MemberDTO dto = result.get(0);
-            System.out.println(dto.getUsername());
-            System.out.println(dto.getAge());
+            final List<Member> result =
+                    em.createQuery("select m from Member m order by m.age asc ", Member.class)
+                            .setFirstResult(10)
+                            .setMaxResults(5)
+                            .getResultList();
+
+            for (Member member1 : result) {
+                System.out.println(member1.toString());
+            }
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
