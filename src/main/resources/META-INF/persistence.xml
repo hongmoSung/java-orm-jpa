@@ -3,10 +3,7 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
-        <class>jpa.basic.ex1hellojpa.hellojpa.Member</class>
-        <class>jpa.basic.ex1hellojpa.hellojpa.Period</class>
-        <class>jpa.basic.ex1hellojpa.hellojpa.Address</class>
-        <class>jpa.basic.ex1hellojpa.hellojpa.AddressEntity</class>
+<!--        <class>jpa.basic.ex1hellojpa.jpql.Member</class>-->
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
