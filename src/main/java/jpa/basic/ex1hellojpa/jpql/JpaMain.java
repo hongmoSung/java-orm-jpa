@@ -1,6 +1,7 @@
 package jpa.basic.ex1hellojpa.jpql;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -17,10 +18,13 @@ public class JpaMain {
             member.setAge(10);
             em.persist(member);
 
-            final TypedQuery<Member> query = em.createQuery("select m from Member m where m.username = :username", Member.class);
-            query.setParameter("username", "홍성모");
-            final Member result = query.getSingleResult();
-            System.out.println("singleResult -> " + result.getUsername());
+            em.flush();
+            em.clear();
+
+            final List<MemberDTO> result = em.createQuery("select new jpa.basic.ex1hellojpa.jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
+            final MemberDTO dto = result.get(0);
+            System.out.println(dto.getUsername());
+            System.out.println(dto.getAge());
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
