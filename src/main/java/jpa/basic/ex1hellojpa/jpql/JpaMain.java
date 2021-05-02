@@ -13,26 +13,21 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUsername("홍성모" + i);
-                member.setAge(i);
-                em.persist(member);
-            }
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setAge(10);
+            member.setTeam(team);
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            final List<Member> result =
-                    em.createQuery("select m from Member m order by m.age asc ", Member.class)
-                            .setFirstResult(10)
-                            .setMaxResults(5)
-                            .getResultList();
-
-            for (Member member1 : result) {
-                System.out.println(member1.toString());
-            }
+            String query = "select m from Member m left outer join m.team t";
+            final List<Member> result = em.createQuery(query, Member.class) .getResultList();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
