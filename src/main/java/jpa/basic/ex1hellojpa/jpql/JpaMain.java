@@ -47,18 +47,13 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query = "select t from Team t";
-            String query = "select distinct t from Team t join fetch t.members";
-            final List<Team> result = em.createQuery(query, Team.class).getResultList();
+            String query = "select m from Member m where m = :member";
+            final Member findMember = em.createQuery(query, Member.class)
+                    .setParameter("member", member1)
+                    .getSingleResult();
 
-            System.out.println("result size -> " + result.size());
+            System.out.println("findMember -> " + findMember);
 
-//            for (Team team : result) {
-//                System.out.println("team -> " + team.getName() + ", " + team.getMembers().size());
-//                for (Member m : team.getMembers()) {
-//                    System.out.println("-> " + m.toString()`);
-//                }
-//            }
 
             tx.commit();
         } catch (Exception e) {
