@@ -1,6 +1,6 @@
 # 자바 ORM 표준 JPA 프로그래밍 - 기본편
 
-### SIL study test  
+### SIL study.   
 <hr>  
 
 1. [x] 강좌 소개
