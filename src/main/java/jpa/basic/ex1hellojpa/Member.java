@@ -1,31 +1,40 @@
 package jpa.basic.ex1hellojpa;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Member {
 
     @Id
-    private Long id;
-
-    @Column(name = "name")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long memberId;
     private String username;
 
-    private Integer age;
+    @ManyToOne()
+    @JoinColumn(name = "teamId")
+    private Team team;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    public Long getMemberId() {
+        return memberId;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
+    public String getUsername() {
+        return username;
+    }
 
-    @Lob
-    private String description;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public Member() {
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
