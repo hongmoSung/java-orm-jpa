@@ -1,5 +1,7 @@
 package jpa.basic.ex1hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -15,6 +17,17 @@ public class Ex1HelloJpaApplication {
 
         tx.begin();
         try {
+            Member member = new Member();
+            member.setUsername("hongmo");
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            final Member findMember = em.getReference(Member.class, member.getMemberId());
+            System.out.println("isLoaded ? -> " + emf.getPersistenceUnitUtil().isLoaded(findMember));
+            Hibernate.initialize(findMember);
+            System.out.println("isLoaded ? -> " + emf.getPersistenceUnitUtil().isLoaded(findMember));
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
