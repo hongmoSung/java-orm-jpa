@@ -4,7 +4,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
         <class>jpa.basic.ex1hellojpa.Member</class>
-        <class>jpa.basic.ex1hellojpa.Team</class>
+        <class>jpa.basic.ex1hellojpa.Item</class>
+        <class>jpa.basic.ex1hellojpa.Order</class>
+        <class>jpa.basic.ex1hellojpa.OrderItem</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
