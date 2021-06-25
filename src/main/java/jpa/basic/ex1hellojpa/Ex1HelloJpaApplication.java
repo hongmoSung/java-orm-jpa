@@ -17,17 +17,20 @@ public class Ex1HelloJpaApplication {
 
         tx.begin();
         try {
-            Member member = new Member();
-            member.setUsername("hongmo");
-            em.persist(member);
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
 
             em.flush();
             em.clear();
 
-            final Member findMember = em.getReference(Member.class, member.getMemberId());
-            System.out.println("isLoaded ? -> " + emf.getPersistenceUnitUtil().isLoaded(findMember));
-            Hibernate.initialize(findMember);
-            System.out.println("isLoaded ? -> " + emf.getPersistenceUnitUtil().isLoaded(findMember));
+            final Parent parent1 = em.find(Parent.class, parent.getId());
+            parent1.getChildList().remove(0);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
