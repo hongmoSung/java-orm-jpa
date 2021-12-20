@@ -14,7 +14,8 @@ repositories {
 
 dependencies {
 	implementation 'org.hibernate:hibernate-core:5.4.30.Final'
-	runtimeOnly 'mysql:mysql-connector-java:8.0.18'
+//	runtimeOnly 'mysql:mysql-connector-java:8.0.18'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

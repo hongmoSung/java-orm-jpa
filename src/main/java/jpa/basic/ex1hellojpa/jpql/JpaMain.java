@@ -4,8 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.Collection;
-import java.util.List;
 
 public class JpaMain {
 
@@ -17,41 +15,21 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team1 = new Team();
-            team1.setName("팀A");
-            em.persist(team1);
+            // 비영속
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("member1");
 
-            Team team2 = new Team();
-            team2.setName("팀B");
-            em.persist(team2);
+            // 영속
+            System.out.println("========== Before ============");
+            em.persist(member);
+            System.out.println("========== After ============");
 
-            Member member1 = new Member();
-            member1.setUsername("회원1");
-            member1.setTeam(team1);
-            em.persist(member1);
+            final Member findMember = em.find(Member.class, 101L);
 
-            Member member2 = new Member();
-            member2.setUsername("회원2");
-            member2.setTeam(team1);
-            em.persist(member2);
+            System.out.println(findMember.getId());
+            System.out.println(findMember.getName());
 
-            Member member3 = new Member();
-            member3.setUsername("회원3");
-            member3.setTeam(team2);
-            em.persist(member3);
-
-            Member member4 = new Member();
-            member4.setUsername("회원4");
-            em.persist(member4);
-
-            final int resultCount = em.createQuery("update Member m set m.age = 20")
-                    .executeUpdate();
-
-            System.out.println("resultCount -> " + resultCount);
-            em.clear();
-
-            final Member findMember = em.find(Member.class, member1.getId());
-            System.out.println("member1.getAge()" + findMember.getAge());
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
