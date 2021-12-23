@@ -3,38 +3,24 @@ package jpa.basic.ex1hellojpa.jpql;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "UniqueName", columnNames = {"name"})
-})
+        @UniqueConstraint(name = "UniqueName", columnNames = {"userName"})}
+)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
+
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long memberId;
 
-    private String name;
+    private String userName;
 
-    @Enumerated(EnumType.STRING)
-    private RolType rolType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-
-    @Transient
-    private String temp;
-
-    @Lob
-    private Integer description2;
-
+    @ManyToOne
+    @JoinColumn(name = "teamId", foreignKey = @ForeignKey(name = "FK_TEAM"))
+    private Team team;
 }
