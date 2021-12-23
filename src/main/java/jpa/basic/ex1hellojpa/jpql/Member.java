@@ -1,40 +1,28 @@
 package jpa.basic.ex1hellojpa.jpql;
 
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import javax.persistence.*;
-import java.util.Date;
-
-@Getter
-@Setter
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "UniqueName", columnNames = {"name"})
-})
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
+
     @Id
     private Long id;
-
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private RolType rolType;
+    public Long getId() {
+        return id;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    public String getName() {
+        return name;
+    }
 
-    @Lob
-    private String description;
-
-    @Transient
-    private String temp;
-
-    @Lob
-    private Integer description2;
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

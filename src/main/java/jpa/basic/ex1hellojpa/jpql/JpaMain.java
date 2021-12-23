@@ -8,26 +8,24 @@ import javax.persistence.Persistence;
 public class JpaMain {
 
     public static void main(String[] args) {
-        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
-        final EntityManager em = emf.createEntityManager();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hello");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        final EntityTransaction tx = em.getTransaction();
-        tx.begin();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        transaction.begin();
 
         try {
-            final Member member = new Member();
-            member.setId(1L);
-            member.setName("A");
-            member.setRolType(RolType.USER);
-
-            em.persist(member);
-            tx.commit();
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("hello2");
+            entityManager.persist(member);
+            transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            tx.rollback();
+            transaction.rollback();
         } finally {
-            em.close();
+            entityManager.close();
         }
-        emf.close();
+        entityManagerFactory.close();
     }
 }
