@@ -4,42 +4,31 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
 
     public static void main(String[] args) {
-        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
-        final EntityManager em = emf.createEntityManager();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hello");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        final EntityTransaction tx = em.getTransaction();
-        tx.begin();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        transaction.begin();
 
         try {
+            List<Member> members = entityManager
+                    .createQuery("select m from Member m", Member.class).getResultList();
 
-            final Team team = new Team();
-            team.setName("TeamA");
-
-            em.persist(team);
-
-            final Member member = new Member();
-            member.setUserName("hongmo");
-            member.setTeam(team);
-
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            final Member findMember = em.find(Member.class, member.getMemberId());
-            final Team memberTeam = findMember.getTeam();
-            System.out.println(memberTeam.getName());
-            tx.commit();
+            for (Member member : members) {
+                System.out.println("member.getName() = " + member.getName());
+            }
+            transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            tx.rollback();
+            transaction.rollback();
         } finally {
-            em.close();
+            entityManager.close();
         }
-        emf.close();
+        entityManagerFactory.close();
     }
 }

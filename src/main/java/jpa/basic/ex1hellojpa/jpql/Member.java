@@ -1,26 +1,28 @@
 package jpa.basic.ex1hellojpa.jpql;
 
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import javax.persistence.*;
-
-@Getter
-@Setter
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "UniqueName", columnNames = {"userName"})}
-)
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long memberId;
+    private Long id;
+    private String name;
 
-    private String userName;
+    public Long getId() {
+        return id;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "teamId", foreignKey = @ForeignKey(name = "FK_TEAM"))
-    private Team team;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
