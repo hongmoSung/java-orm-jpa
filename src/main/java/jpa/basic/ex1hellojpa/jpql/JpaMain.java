@@ -17,11 +17,12 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Member member = entityManager.find(Member.class, 1L);
-            member.setName("준영속 상태 테스트");
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.ADMIN);
 
-            entityManager.detach(member);
-
+            entityManager.persist(member);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
