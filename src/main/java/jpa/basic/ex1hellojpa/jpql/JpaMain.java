@@ -17,13 +17,22 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            List<Member> members = entityManager
-                    .createQuery("select m from Member m", Member.class).getResultList();
+            Member member1 = new Member(1L, "member1");
+            Member member2 = new Member(2L, "member2");
+            Member member3 = new Member(3L, "member3");
+            Member member4 = new Member(4L, "member4");
 
-            for (Member member : members) {
-                System.out.println("member.getName() = " + member.getName());
-            }
+            entityManager.persist(member1);
+            entityManager.persist(member2);
+            entityManager.persist(member3);
+            entityManager.persist(member4);
+
+            System.out.println("=============== JPQL ==================");
+            entityManager.createQuery("select m from Member m", Member.class).getResultList();
+            System.out.println("=============== JPQL ==================");
+
             transaction.commit();
+
         } catch (Exception e) {
             transaction.rollback();
         } finally {
