@@ -17,12 +17,23 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Member member = new Member();
-            member.setId(1L);
-            member.setUsername("A");
-            member.setRoleType(RoleType.ADMIN);
+            Member hi = new Member("hi");
+            Member hi1 = new Member("hi1");
+            Member hi2 = new Member("hi2");
+            Member hi3 = new Member("hi3");
+            Member hi4 = new Member("hi4");
 
-            entityManager.persist(member);
+            entityManager.persist(hi);
+            entityManager.persist(hi1);
+            entityManager.persist(hi2);
+            entityManager.persist(hi3);
+            entityManager.persist(hi4);
+
+            System.out.println(hi);
+            System.out.println(hi1);
+            System.out.println(hi2);
+            System.out.println(hi3);
+            System.out.println(hi4);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
