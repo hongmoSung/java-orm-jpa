@@ -17,23 +17,14 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Member member1 = new Member(1L, "member1");
-            Member member2 = new Member(2L, "member2");
-            Member member3 = new Member(3L, "member3");
-            Member member4 = new Member(4L, "member4");
+            Member member = entityManager.find(Member.class, 1L);
+            member.setName("준영속 상태 테스트");
 
-            entityManager.persist(member1);
-            entityManager.persist(member2);
-            entityManager.persist(member3);
-            entityManager.persist(member4);
-
-            System.out.println("=============== JPQL ==================");
-            entityManager.createQuery("select m from Member m", Member.class).getResultList();
-            System.out.println("=============== JPQL ==================");
+            entityManager.detach(member);
 
             transaction.commit();
-
         } catch (Exception e) {
+            e.printStackTrace();
             transaction.rollback();
         } finally {
             entityManager.close();
