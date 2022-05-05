@@ -5,8 +5,8 @@
     <persistence-unit name="hello">
         <class>jpa.basic.ex1hellojpa.jpql.Member</class>
         <class>jpa.basic.ex1hellojpa.jpql.Team</class>
-<!--        <class>jpa.basic.ex1hellojpa.jpql.Product</class>-->
-<!--        <class>jpa.basic.ex1hellojpa.jpql.Order</class>-->
+        <class>jpa.basic.ex1hellojpa.jpql.Parent</class>
+        <class>jpa.basic.ex1hellojpa.jpql.Child</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>

@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class JpaMain {
 
@@ -19,24 +21,26 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            entityManager.persist(team);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setTeam(team);
-            entityManager.persist(member);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
+            entityManager.persist(parent);
             entityManager.flush();
             entityManager.clear();
 
-            List<Member> results = entityManager
-                    .createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
+            Parent result = entityManager.createQuery("select p from Parent p join fetch p.childList where p.id = " + child1.getId(), Parent.class)
+                    .getSingleResult();
 
-            for (Member m : results) {
-                System.out.println("team name = " + m.getTeam().getName());
-            }
+            List<Child> childList = result.getChildList();
+            Child child = entityManager.find(Child.class, child1.getId());
+            boolean remove = childList.remove(child);
+            System.out.println("remove = " + remove);
+
+
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
