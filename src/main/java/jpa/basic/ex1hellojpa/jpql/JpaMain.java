@@ -17,23 +17,21 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Member hi = new Member("hi");
-            Member hi1 = new Member("hi1");
-            Member hi2 = new Member("hi2");
-            Member hi3 = new Member("hi3");
-            Member hi4 = new Member("hi4");
+            Team team = new Team();
+            team.setName("teamA");
+            entityManager.persist(team);
 
-            entityManager.persist(hi);
-            entityManager.persist(hi1);
-            entityManager.persist(hi2);
-            entityManager.persist(hi3);
-            entityManager.persist(hi4);
+            Member member = new Member();
+            member.setUsername("userA");
+            member.setTeam(team);
+            entityManager.persist(member);
 
-            System.out.println(hi);
-            System.out.println(hi1);
-            System.out.println(hi2);
-            System.out.println(hi3);
-            System.out.println(hi4);
+            entityManager.clear();
+
+            Member findMember = entityManager.find(Member.class, member.getId());
+            Team findMembersTeam = findMember.getTeam();
+            System.out.println(findMembersTeam.toString());
+
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

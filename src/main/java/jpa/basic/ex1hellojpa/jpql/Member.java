@@ -18,6 +18,10 @@ public class Member {
     private Long id;
     private String username;
 
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     public Member() {
     }
 
