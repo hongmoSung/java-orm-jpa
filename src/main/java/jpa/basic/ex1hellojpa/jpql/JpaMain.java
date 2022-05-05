@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
 
@@ -18,21 +19,24 @@ public class JpaMain {
         transaction.begin();
 
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            entityManager.persist(team);
+
             Member member = new Member();
             member.setUsername("member1");
+            member.setTeam(team);
             entityManager.persist(member);
 
             entityManager.flush();
             entityManager.clear();
 
-//            Member findMember = entityManager.find(Member.class, 1L);
-            Member findMember = entityManager.getReference(Member.class, 1L);
-//            System.out.println("isLoaded? " + entityManagerFactory.getPersistenceUnitUtil().isLoaded(findMember));
-//            findMember.getUsername();
-//            System.out.println("isLoaded2? " + entityManagerFactory.getPersistenceUnitUtil().isLoaded(findMember));
+            List<Member> results = entityManager
+                    .createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
 
-            Hibernate.initialize(findMember);
-
+            for (Member m : results) {
+                System.out.println("team name = " + m.getTeam().getName());
+            }
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
