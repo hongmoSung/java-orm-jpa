@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @ToString
 @Getter
@@ -21,6 +20,11 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        this.getTeam().getMembers().add(this);
+    }
 
     public Member() {
     }
